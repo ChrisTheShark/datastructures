@@ -1,8 +1,29 @@
+export const IN_ORDER = 'in-order'
+export const PRE_ORDER = 'pre-order'
+export const POST_ORDER = 'post-order'
+
 class BinaryTree {
+
     constructor(value) {
         this.value = value
         this.right = null
         this.left = null
+    }
+
+    getMaxValue() {
+        if (!this.right) {
+            return this.value
+        } else {
+            return this.right.getMaxValue()
+        }
+    }
+
+    getMinValue() {
+        if (!this.left) {
+            return this.value
+        } else {
+            return this.left.getMinValue()
+        }
     }
 
     contains(value) {
@@ -27,6 +48,15 @@ class BinaryTree {
             if (!this.right) this.right = new BinaryTree(value)
             else this.right.insert(value)
         }
+    }
+
+    depthFirstTraverse(iteratorFunc, order) {
+        const internalOrder = order ? order : IN_ORDER
+        if (internalOrder === PRE_ORDER) iteratorFunc(this.value)
+        if (this.left) this.left.depthFirstTraverse(iteratorFunc)
+        if (internalOrder === IN_ORDER) iteratorFunc(this.value)
+        if (this.right) this.right.depthFirstTraverse(iteratorFunc)
+        if (internalOrder === POST_ORDER) iteratorFunc(this.value)
     }
 }
 
