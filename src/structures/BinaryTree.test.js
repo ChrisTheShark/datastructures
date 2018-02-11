@@ -9,6 +9,32 @@ describe('BinaryTree', () => {
         });
     });
 
+    describe('#hasChildren', () => {
+        it('should return false if left and right are null', () => {
+            const tree = new BinaryTree(3)
+            expect(tree.hasChildren()).toEqual(false)
+        })
+
+        it('should return true if left is not null but right is', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(2)
+            expect(tree.hasChildren()).toEqual(true)
+        })
+
+        it('should return true if right is not null but left is', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(4)
+            expect(tree.hasChildren()).toEqual(true)
+        })
+
+        it('should return true if both children are present', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(2)
+            tree.insert(4)
+            expect(tree.hasChildren()).toEqual(true)
+        })
+    })
+
     describe('#contains()', () => {
         it('should return true if the tree contains the provided value.', () => {
             const tree = new BinaryTree(3);
@@ -76,25 +102,44 @@ describe('BinaryTree', () => {
         })
     })
 
-    describe('#getMaxValue', () => {
+    describe('#max', () => {
         it('should return the maximum value in the tree', () => {
             const tree = new BinaryTree(3)
             tree.insert(2);
             tree.insert(1);
             tree.insert(4);
 
-            expect(tree.getMaxValue()).toEqual(4)
+            expect(tree.max()).toEqual(4)
         })
     })
 
-    describe('#getMinValue', () => {
+    describe('#min', () => {
         it('should return the maximum value in the tree', () => {
             const tree = new BinaryTree(3)
             tree.insert(2);
             tree.insert(1);
             tree.insert(4);
 
-            expect(tree.getMinValue()).toEqual(1)
+            expect(tree.min()).toEqual(1)
+        })
+    })
+
+    describe('#height', () => {
+        it('should return 0 if the root value is null', () => {
+            const tree = new BinaryTree()
+            expect(tree.height()).toEqual(0)
+        })
+
+        it('should return 0 if the root value is not null and there are no edges', () => {
+            const tree = new BinaryTree(3)
+            expect(tree.height()).toEqual(0)
+        })
+
+        it('should return 1 if the value is not null and there are left and right branches', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(1);
+            tree.insert(4);
+            expect(tree.height()).toEqual(1)
         })
     })
 });

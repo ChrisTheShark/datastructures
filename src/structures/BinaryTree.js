@@ -10,20 +10,24 @@ class BinaryTree {
         this.left = null
     }
 
-    getMaxValue() {
+    max() {
         if (!this.right) {
             return this.value
         } else {
-            return this.right.getMaxValue()
+            return this.right.max()
         }
     }
 
-    getMinValue() {
+    min() {
         if (!this.left) {
             return this.value
         } else {
-            return this.left.getMinValue()
+            return this.left.min()
         }
+    }
+
+    hasChildren() {
+        return this.left !== null || this.right !== null
     }
 
     contains(value) {
@@ -48,6 +52,14 @@ class BinaryTree {
             if (!this.right) this.right = new BinaryTree(value)
             else this.right.insert(value)
         }
+    }
+
+    height() {
+        if (this.value === null || !this.hasChildren()) return 0
+        return Math.max(
+            this.left ? this.left.height() : 0,
+            this.right ? this.right.height() : 0
+        ) + 1
     }
 
     depthFirstTraverse(iteratorFunc, order) {
