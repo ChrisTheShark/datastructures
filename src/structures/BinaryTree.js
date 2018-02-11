@@ -4,8 +4,9 @@ export const POST_ORDER = 'post-order'
 
 class BinaryTree {
 
-    constructor(value) {
+    constructor(value, parent) {
         this.value = value
+        this.parent = parent
         this.right = null
         this.left = null
     }
@@ -46,20 +47,25 @@ class BinaryTree {
 
     insert(value) {
         if (this.value >= value) {
-            if (!this.left) this.left = new BinaryTree(value)
+            if (!this.left) this.left = new BinaryTree(value, this)
             else this.left.insert(value)
         } else if (this.value < value) {
-            if (!this.right) this.right = new BinaryTree(value)
+            if (!this.right) this.right = new BinaryTree(value, this)
             else this.right.insert(value)
         }
     }
 
     height() {
-        if (this.value === null || !this.hasChildren()) return 0
+        if (!this.value || !this.hasChildren()) return 0
         return Math.max(
             this.left ? this.left.height() : 0,
             this.right ? this.right.height() : 0
         ) + 1
+    }
+
+    depth() {
+        if (!this.parent) return 0
+        else return 1 + this.parent.depth()
     }
 
     depthFirstTraverse(iteratorFunc, order) {
@@ -69,6 +75,19 @@ class BinaryTree {
         if (internalOrder === IN_ORDER) iteratorFunc(this.value)
         if (this.right) this.right.depthFirstTraverse(iteratorFunc)
         if (internalOrder === POST_ORDER) iteratorFunc(this.value)
+    }
+
+    breadthFirstTraverse(iteratorFunc) {
+        let queue = [this]
+
+        while (queue.length) {
+            let node = queue.shift()
+
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
+
+            iteratorFunc(node)
+        }
     }
 }
 

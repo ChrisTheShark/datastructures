@@ -102,6 +102,23 @@ describe('BinaryTree', () => {
         })
     })
 
+    describe('#breadthFirstTraverse', () => {
+        it('should invoke the provided function in breadth order', () => {
+            const mockIterator = jest.fn()
+            const tree = new BinaryTree(3)
+            tree.insert(2);
+            tree.insert(1);
+            tree.insert(4);
+
+            tree.breadthFirstTraverse(mockIterator)
+
+            expect(mockIterator.mock.calls[0][0]).not.toBeNull()
+            expect(mockIterator.mock.calls[1][0]).not.toBeNull()
+            expect(mockIterator.mock.calls[2][0]).not.toBeNull()
+            expect(mockIterator.mock.calls[3][0]).not.toBeNull()
+        })
+    })
+
     describe('#max', () => {
         it('should return the maximum value in the tree', () => {
             const tree = new BinaryTree(3)
@@ -140,6 +157,38 @@ describe('BinaryTree', () => {
             tree.insert(1);
             tree.insert(4);
             expect(tree.height()).toEqual(1)
+        })
+    })
+
+    describe('#depth', () => {
+        it('should return 0 if tree is the root with null value', () => {
+            const tree = new BinaryTree()
+            expect(tree.depth()).toEqual(0)
+        })
+
+        it('should return 0 if tree is the root with non null value', () => {
+            const tree = new BinaryTree(3)
+            expect(tree.depth()).toEqual(0)
+        })
+
+        it('should return 1 if tree has a parent and has a height of one', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(2)
+            tree.insert(4)
+
+            expect(tree.left.depth()).toEqual(1)
+            expect(tree.right.depth()).toEqual(1)
+        })
+
+        it('should return 2 if tree has two parents and is the has a height of one', () => {
+            const tree = new BinaryTree(3)
+            tree.insert(2)
+            tree.insert(1)
+            tree.insert(4)
+            tree.insert(5)
+
+            expect(tree.left.left.depth()).toEqual(2)
+            expect(tree.right.right.depth()).toEqual(2)
         })
     })
 });
