@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import DisplayTree from './DisplayTree'
-import BinaryTree from '../structures/BinaryTree'
+import DisplayableBinaryTree from '../structures/DisplayableBinaryTree'
 
 class App extends Component {
   render() {
-      const tree = new BinaryTree(3)
+      const tree = new DisplayableBinaryTree(3)
       tree.insert(2)
       tree.insert(1)
       tree.insert(4)
