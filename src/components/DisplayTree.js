@@ -1,16 +1,41 @@
-import React from 'react'
+import React, { Component } from 'react'
+import InsertBar from './InsertBar'
+import DisplayableBinaryTree from '../structures/DisplayableBinaryTree'
 
-const DisplayTree = (props) => {
-    return (
-        <div>
-            <h1 style={{ fontSize: '3rem', textAlign: 'center', marginTop: '100px' }}>Binary Tree Height: {props.tree.height()}</h1>
-            <div className="display-container" style={{ display: 'flex', justifyContent: 'center' }}>
-                {
-                    props.tree.display()
-                }
+class DisplayTree extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            tree: new DisplayableBinaryTree()
+        }
+    }
+
+    onInsert = (value) => {
+        let tree = this.state.tree
+        tree.insert(value)
+        this.setState({
+            tree
+        })
+    }
+
+    render() {
+        console.log(this.state.tree)
+        return (
+            <div>
+                <InsertBar onInsert={this.onInsert}/>
+                <h1 style={{ fontSize: '3rem', textAlign: 'center', marginTop: '100px' }}>Binary Tree Height: {this.state.tree.height()}</h1>
+                <div className="display-container" style={{ display: 'flex', justifyContent: 'center' }}>
+                    {
+                        this.state.tree.value ?
+                            this.state.tree.display()
+                        :
+                        null
+                    }
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default DisplayTree

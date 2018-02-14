@@ -6,9 +6,10 @@ const nodeStyle = {
     borderRadius: '50%',
     textAlign: 'center',
     display: 'inline-block',
-    minWidth: '50px',
+    minWidth: '70px',
     minHeight: '50px',
-    fontSize: '3rem'
+    fontSize: '3rem',
+    backgroundColor: '#5bc0de'
 }
 
 const leftStyle = {
@@ -23,7 +24,9 @@ const rightStyle = {
 
 class DisplayableBinaryTree extends BinaryTree {
     insert(value) {
-        if (this.value >= value) {
+        if (!this.value) {
+            this.value = value
+        } else if (this.value >= value) {
             if (!this.left) this.left = new DisplayableBinaryTree(value, this)
             else this.left.insert(value)
         } else if (this.value < value) {

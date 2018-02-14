@@ -46,7 +46,9 @@ class BinaryTree {
     }
 
     insert(value) {
-        if (this.value >= value) {
+        if (!this.value) {
+            this.value = value
+        } else if (this.value >= value) {
             if (!this.left) this.left = new BinaryTree(value, this)
             else this.left.insert(value)
         } else if (this.value < value) {

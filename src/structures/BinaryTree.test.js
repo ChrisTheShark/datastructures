@@ -48,6 +48,11 @@ describe('BinaryTree', () => {
     });
 
     describe('#insert()', () => {
+        it('should insert a value to the structure, setting the top value if null', () => {
+            const tree = new BinaryTree();
+            tree.insert(3);
+            expect(tree.value).toEqual(true);
+        })
         it('should insert a value to the structure', () => {
             const tree = new BinaryTree(3);
             tree.insert(4);
