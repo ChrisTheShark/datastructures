@@ -12,12 +12,12 @@ const nodeStyle = {
     backgroundColor: '#5bc0de'
 }
 
-const leftStyle = {
+export const leftStyle = {
     float: 'left',
     marginTop: '50px'
 }
 
-const rightStyle = {
+export const rightStyle = {
     float: 'right',
     marginTop: '50px'
 }

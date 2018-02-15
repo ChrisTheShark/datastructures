@@ -24,7 +24,6 @@ class InsertBar extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="col-lg-8" style={{ marginTop: '30px' }}>

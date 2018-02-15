@@ -14,13 +14,10 @@ class DisplayTree extends Component {
     onInsert = (value) => {
         let tree = this.state.tree
         tree.insert(value)
-        this.setState({
-            tree
-        })
+        this.setState({ tree })
     }
 
     render() {
-        console.log(this.state.tree)
         return (
             <div>
                 <InsertBar onInsert={this.onInsert}/>

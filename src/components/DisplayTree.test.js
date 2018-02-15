@@ -4,10 +4,10 @@ import DisplayTree from './DisplayTree'
 import BinaryTree from '../structures/BinaryTree'
 
 describe('DisplayTree', () => {
-    // it('renders without crashing', () => {
-    //     let wrapper = shallow(<DisplayTree tree={new BinaryTree(0)}/>)
-    //     expect(wrapper.find('.display-container').length).toEqual(1)
-    // })
+    it('renders without crashing', () => {
+        let wrapper = shallow(<DisplayTree tree={new BinaryTree(0)}/>)
+        expect(wrapper.find('.display-container').length).toEqual(1)
+    })
 
     it('renders a provided tree when provided', () => {
         const tree = new BinaryTree(3)
