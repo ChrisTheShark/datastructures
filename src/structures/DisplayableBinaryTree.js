@@ -23,17 +23,8 @@ export const rightStyle = {
 }
 
 class DisplayableBinaryTree extends BinaryTree {
-    insert(value) {
-        if (!this.value) {
-            this.value = value
-        } else if (this.value >= value) {
-            if (!this.left) this.left = new DisplayableBinaryTree(value, this)
-            else this.left.insert(value)
-        } else if (this.value < value) {
-            if (!this.right) this.right = new DisplayableBinaryTree(value, this)
-            else this.right.insert(value)
-        }
-    }
+
+    type = DisplayableBinaryTree
 
     getDirectionStyle() {
         if (this.parent) {
