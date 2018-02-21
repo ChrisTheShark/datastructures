@@ -4,6 +4,8 @@ export const POST_ORDER = 'post-order'
 
 class BinaryTree {
 
+    type = BinaryTree
+
     constructor(value, parent) {
         this.value = value
         this.parent = parent
@@ -46,13 +48,14 @@ class BinaryTree {
     }
 
     insert(value) {
+        value = parseInt(value,10)
         if (!this.value) {
             this.value = value
         } else if (this.value >= value) {
-            if (!this.left) this.left = new BinaryTree(value, this)
+            if (!this.left) this.left = new this.type(value, this)
             else this.left.insert(value)
         } else if (this.value < value) {
-            if (!this.right) this.right = new BinaryTree(value, this)
+            if (!this.right) this.right = new this.type(value, this)
             else this.right.insert(value)
         }
     }
