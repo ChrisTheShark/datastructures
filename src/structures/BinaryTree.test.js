@@ -45,6 +45,20 @@ describe('BinaryTree', () => {
             const tree = new BinaryTree(3);
             expect(tree.contains(4)).toEqual(false);
         });
+
+        it('should return true if the tree contains the value to the left', () => {
+            const tree = new BinaryTree(3);
+
+            tree.insert(2)
+            tree.insert(1)
+            tree.insert(4)
+            tree.insert(5)
+
+            expect(tree.contains(2)).toEqual(true);
+            expect(tree.contains(1)).toEqual(true);
+            expect(tree.contains(4)).toEqual(true);
+            expect(tree.contains(5)).toEqual(true);
+        })
     });
 
     describe('#insert()', () => {

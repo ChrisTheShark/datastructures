@@ -19,4 +19,13 @@ describe('DisplayTree', () => {
         let wrapper = shallow(<DisplayTree tree={tree}/>)
         expect(wrapper.find('.display-container').length).toEqual(1)
     })
+
+    it('updates the state tree onInsert()', () => {
+        let wrapper = shallow(<DisplayTree tree={new BinaryTree(4)}/>)
+
+        expect(wrapper.state().tree.height()).toEqual(0)
+        wrapper.instance().onInsert(2)
+        wrapper.instance().onInsert(6)
+        expect(wrapper.state().tree.height()).toEqual(1)
+    })
 })
