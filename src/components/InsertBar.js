@@ -23,6 +23,13 @@ class InsertBar extends Component {
         this.props.onInsert(this.state.value)
     }
 
+    onReset = (e) => {
+        this.setState({
+            value: ''
+        })
+        this.props.onReset(e)
+    }
+
     render() {
         return (
             <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -30,7 +37,8 @@ class InsertBar extends Component {
                     <div className="input-group">
                     <input type="text" className="form-control" placeholder="Insert into structure" value={this.state.value} onChange={this.onChange}/>
                     <span className="input-group-btn">
-                        <button className="btn btn-success" type="button" onClick={this.onSubmit}>Insert!</button>
+                        <button className="btn btn-success" type="button" onClick={this.onSubmit}>Insert</button>
+                        <button className="btn btn-danger" type="button" style={{ marginLeft: '2px' }} onClick={this.onReset}>Reset</button>
                     </span>
                     </div>
                 </div>

@@ -1,16 +1,16 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import DisplayTree from './DisplayTree'
-import BinaryTree from '../structures/BinaryTree'
+import { DisplayTree } from './DisplayTree'
+import DisplayableBinaryTree from '../structures/DisplayableBinaryTree'
 
 describe('DisplayTree', () => {
     it('renders without crashing', () => {
-        let wrapper = shallow(<DisplayTree tree={new BinaryTree(0)}/>)
+        let wrapper = shallow(<DisplayTree tree={new DisplayableBinaryTree(0)}/>)
         expect(wrapper.find('.display-container').length).toEqual(1)
     })
 
     it('renders a provided tree when provided', () => {
-        const tree = new BinaryTree(3)
+        const tree = new DisplayableBinaryTree(3)
         tree.insert(2)
         tree.insert(1)
         tree.insert(4)
@@ -20,12 +20,19 @@ describe('DisplayTree', () => {
         expect(wrapper.find('.display-container').length).toEqual(1)
     })
 
-    it('updates the state tree onInsert()', () => {
-        let wrapper = shallow(<DisplayTree tree={new BinaryTree(4)}/>)
+    it('invokes the addTreeValue action creator onInsert()', () => {
+        const mockAddTreeValue = jest.fn()
+        let wrapper = shallow(<DisplayTree addTreeValue={mockAddTreeValue} tree={new DisplayableBinaryTree(4)}/>)
 
-        expect(wrapper.state().tree.height()).toEqual(0)
         wrapper.instance().onInsert(2)
-        wrapper.instance().onInsert(6)
-        expect(wrapper.state().tree.height()).toEqual(1)
+        expect(mockAddTreeValue).toHaveBeenCalled()
+    })
+
+    it('invokes the resetTree action creator onReset()', () => {
+        const mockResetTree = jest.fn()
+        let wrapper = shallow(<DisplayTree resetTree={mockResetTree} tree={new DisplayableBinaryTree(4)}/>)
+
+        wrapper.instance().onReset()
+        expect(mockResetTree).toHaveBeenCalled()
     })
 })

@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
 import InsertBar from './InsertBar'
-import DisplayableBinaryTree from '../structures/DisplayableBinaryTree'
+import { connect } from 'react-redux'
+import { addTreeValue, resetTree } from '../actions/treeActions'
 
-class DisplayTree extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            tree: new DisplayableBinaryTree()
-        }
+export class DisplayTree extends Component {
+    onInsert = (value) => {
+        const { tree, addTreeValue } = this.props
+        addTreeValue(tree, value)
     }
 
-    onInsert = (value) => {
-        let tree = this.state.tree
-        tree.insert(value)
-        this.setState({ tree })
+    onReset = () => {
+        this.props.resetTree()
     }
 
     render() {
+        const { tree } = this.props
         return (
             <div>
-                <InsertBar onInsert={this.onInsert}/>
-                <h1 style={{ fontSize: '3rem', textAlign: 'center', marginTop: '100px' }}>Binary Tree Height: {this.state.tree.height()}</h1>
+                <InsertBar onInsert={this.onInsert} onReset={this.onReset}/>
+                <h1 style={{ fontSize: '3rem', textAlign: 'center', marginTop: '100px' }}>Binary Tree Height: {tree.height()}</h1>
                 <div className="display-container" style={{ display: 'flex', justifyContent: 'center' }}>
                     {
-                        this.state.tree.value ?
-                            this.state.tree.display()
+                        tree.value ?
+                            tree.display()
                         :
                         null
                     }
@@ -35,4 +32,10 @@ class DisplayTree extends Component {
     }
 }
 
-export default DisplayTree
+const mapStateToProps = (state) => {
+    return {
+        tree: state.tree
+    }
+}
+
+export default connect(mapStateToProps, { addTreeValue, resetTree })(DisplayTree)

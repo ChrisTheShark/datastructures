@@ -13,6 +13,15 @@ class BinaryTree {
         this.left = null
     }
 
+    static clone(tree) {
+        const copiedTree = new BinaryTree(tree.value)
+
+        copiedTree.left = tree.left
+        copiedTree.right = tree.right
+
+        return copiedTree
+    }
+
     max() {
         if (!this.right) {
             return this.value

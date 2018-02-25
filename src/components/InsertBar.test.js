@@ -19,14 +19,25 @@ describe('InsertBar', () => {
         expect(wrapper.state().value).toEqual('3')
     })
 
-    it('invokes the onInsert prop onClick of the button', () => {
+    it('invokes the onInsert prop onClick of the insert button', () => {
         const mockOnSubmit = jest.fn()
         const wrapper = shallow(<InsertBar onInsert={mockOnSubmit}/>)
 
-        const button = wrapper.find('button')
+        const button = wrapper.find('button.btn-success')
         expect(button.length).toEqual(1)
 
         button.simulate('click')
         expect(mockOnSubmit).toHaveBeenCalled()
+    })
+
+    it('invokes the onReset prop onClick of the reset button', () => {
+        const mockOnReset = jest.fn()
+        const wrapper = shallow(<InsertBar onReset={mockOnReset}/>)
+
+        const button = wrapper.find('button.btn-danger')
+        expect(button.length).toEqual(1)
+
+        button.simulate('click')
+        expect(mockOnReset).toHaveBeenCalled()
     })
 })

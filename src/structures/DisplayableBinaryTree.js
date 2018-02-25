@@ -26,6 +26,15 @@ class DisplayableBinaryTree extends BinaryTree {
 
     type = DisplayableBinaryTree
 
+    static clone(tree) {
+        const copiedTree = new DisplayableBinaryTree(tree.value)
+
+        copiedTree.left = tree.left
+        copiedTree.right = tree.right
+
+        return copiedTree
+    }
+
     getDirectionStyle() {
         if (this.parent) {
             if (this.parent.value >= this.value) return leftStyle

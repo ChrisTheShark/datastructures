@@ -9,7 +9,21 @@ describe('BinaryTree', () => {
         });
     });
 
-    describe('#hasChildren', () => {
+    describe('#clone()', () => {
+        it('should copy a provided tree', () => {
+            const treeToCopy = new BinaryTree(3)
+            treeToCopy.insert(1)
+            treeToCopy.insert(5)
+
+            const copiedTree = BinaryTree.clone(treeToCopy)
+
+            expect(copiedTree.value).toEqual(treeToCopy.value)
+            expect(copiedTree.left).toEqual(treeToCopy.left)
+            expect(copiedTree.right).toEqual(treeToCopy.right)
+        })
+    })
+
+    describe('#hasChildren()', () => {
         it('should return false if left and right are null', () => {
             const tree = new BinaryTree(3)
             expect(tree.hasChildren()).toEqual(false)
